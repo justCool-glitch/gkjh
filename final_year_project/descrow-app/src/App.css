@@ -1,0 +1,17 @@
+.app-container {
+  margin: 50px auto;
+  max-width: 1000px;
+  padding: 30px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.cta-button {
+  width: 250px;
+  padding: 15px 25px;
+  color: white;
+  border: none;
+  font-size: 18px;
+  margin: 30px;
+  cursor: pointer;
+}
