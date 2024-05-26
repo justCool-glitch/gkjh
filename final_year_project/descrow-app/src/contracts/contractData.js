@@ -1,9 +1,9 @@
 import factory from './DescrowFactory.json';
 import descrow from './Descrow.json';
 
-const factoryAddress = "0x84ad752Bd23f934CfDC91Bf8fF027f9A3aF8aC83";
-const factoryAbi = factory.abi;
-const descrowAbi = descrow.abi;
+const factoryAddress = "0x1242Ec98C6b8f9E0fF4400571e015445e36dB675";
+const factoryAbi = factory;
+const descrowAbi = descrow;
 
 export { factoryAddress, factoryAbi, descrowAbi }
 

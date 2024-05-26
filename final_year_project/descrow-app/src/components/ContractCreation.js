@@ -71,6 +71,8 @@ const ContractCreation = (props) => {
                         <p>Transaction failed. Please try again.</p>
                     </div>
                 </FlashMessage>}
+                {
+                }
             </div>}
 
         </Fragment>

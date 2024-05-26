@@ -20,7 +20,8 @@ const Contract = (props) => {
 
 
     const getStatus = () => {
-        if (contractState.active && isLocked) return 'Active';
+        if(isConflicted()) return 'Conflict';
+        else if (contractState.active && isLocked) return 'Active';
         else if (contractState.active && !isLocked) return 'Unlocked';
         else if (contractState.cancelled) return 'Cancelled';
         return 'Completed';
@@ -38,11 +39,17 @@ const Contract = (props) => {
         return false;
     }
 
-    const btnConfirm = contractState && isBuyer && isLocked && noCancel;
-    const btnStake = contractState && !isLocked && !isStaked();
-    const btnRevokeStake = contractState && !isLocked && isStaked();
-    const btnCancel = contractState && isLocked && !isCancelled();
-    const btnRevokeCancel = contractState && isLocked && isCancelled();
+    const isConflicted = () => {
+        if(contractState.conflicted) return true;
+        return false;
+    }
+
+    const btnConfirm = contractState && isBuyer && isLocked && noCancel && !isConflicted();
+    const btnStake = contractState && !isLocked && !isStaked() && !isConflicted();
+    const btnRevokeStake = contractState && !isLocked && isStaked() && !isConflicted();
+    const btnCancel = contractState && isLocked && !isCancelled() && !isConflicted();
+    const btnRevokeCancel = contractState && isLocked && isCancelled() && !isConflicted();
+    const btnConflicted = contractState && !isConflicted() && isStaked();
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -125,6 +132,21 @@ const Contract = (props) => {
         }
     }
 
+    const conflict = async () => {
+        setMineStatus('mining')
+        let txn;
+
+        try {
+            txn = await descrowContract.conflict();
+            await txn.wait();
+            setMineStatus('success')
+
+        } catch (err) {
+            setMineStatus('error')
+            console.log(err);
+        }
+    }
+
 
 
     useEffect(() => {
@@ -143,6 +165,7 @@ const Contract = (props) => {
                 sellerCancel: contractDetails.sellerCancel,
                 buyerStake: contractDetails.buyerStake,
                 sellerStake: contractDetails.sellerStake,
+                conflicted: contractDetails.conflicted,
                 address: contractDetails.conAddr,
                 price: ethers.utils.formatEther(contractDetails.salePrice),
             }
@@ -202,6 +225,7 @@ const Contract = (props) => {
                         {btnCancel && <button onClick={cancel}>Cancel</button>}
                         {btnRevokeCancel && <button onClick={revokeCancel}>Revoke Cancel</button>}
                         {btnConfirm && <button onClick={confirm}>Finish</button>}
+                        {btnConflicted && <button onClick={conflict}>Raise Conflict</button>}
                     </div>
                 }
             </div>}

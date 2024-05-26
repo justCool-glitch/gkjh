@@ -35,6 +35,10 @@
     background: yellow;
 }
 
+.Conflict{
+    background: red;
+}
+
 .Cancelled {
     background: red;
 }
