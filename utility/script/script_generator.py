@@ -22,7 +22,7 @@ def generate_script(topic):
             - If your boyfriend could escape anywhere for a romantic getaway, which destination would he choose?
             - If your girlfriend is having a sweet tooth moment, which indulgent dessert would you surprise her with?
 
-            After presenting the question, provide 6 numbered options for answers, ensuring they are varied and intriguing.
+            After presenting the question, provide 6 numbered one-two word options for answers, ensuring they are varied and intriguing.
 
             For example, for the question "If your boyfriend could escape anywhere for a romantic getaway, which destination would he choose?" the options could be:
 
