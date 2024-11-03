@@ -51,17 +51,21 @@ def fix_json(json_str):
 def getVideoSearchQueriesTimed(script,captions_timed):
     end = captions_timed[-1][0][1]
     try:
-        
+        print("inside try for getVideoSearchQueriesTimed")
         out = [[[0,0],""]]
         while out[-1][0][1] != end:
             content = call_OpenAI(script,captions_timed).replace("'",'"')
+            print("got content", content)
             try:
+                print("trying to load json")
                 out = json.loads(content)
             except Exception as e:
+                print("error in json load",e)
                 print("content: \n", content, "\n\n")
                 print(e)
                 content = fix_json(content.replace("```json", "").replace("```", ""))
                 out = json.loads(content)
+        print("returning out",out)
         return out
     except Exception as e:
         print("error in response",e)
