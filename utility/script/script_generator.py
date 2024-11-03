@@ -39,7 +39,9 @@ def generate_script(topic):
 
         # Output
         {"script": "Here is the script ..."}
-        """
+
+        and the topic is 
+        """, topic
     )
 
     response = client.chat.completions.create(
