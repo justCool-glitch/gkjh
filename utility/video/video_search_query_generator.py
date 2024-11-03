@@ -48,27 +48,38 @@ def fix_json(json_str):
     json_str = json_str.replace('"you didn"t"', '"you didn\'t"')
     return json_str
 
-def getVideoSearchQueriesTimed(script,captions_timed):
+def getVideoSearchQueriesTimed(script, captions_timed):
     end = captions_timed[-1][0][1]
     try:
         print("inside try for getVideoSearchQueriesTimed")
-        out = [[[0,0],""]]
+        out = [[[0, 0], ""]]
+        
+        # Loop until the end time matches the last segment's end time
         while out[-1][0][1] != end:
-            content = call_OpenAI(script,captions_timed).replace("'",'"')
+            content = call_OpenAI(script, captions_timed).replace("'", '"')
             print("got content", content)
+            
             try:
                 print("trying to load json")
                 out = json.loads(content)
+                
+                # Check if the last segment's end time matches 'end'
+                if out[-1][0][1] != end:
+                    print(f"The current output end time ({out[-1][0][1]}) does not match the expected end time ({end}). Retrying...")
+
             except Exception as e:
-                print("error in json load",e)
+                print("error in json load", e)
                 print("content: \n", content, "\n\n")
-                print(e)
                 content = fix_json(content.replace("```json", "").replace("```", ""))
+                
+                # Retry parsing after fixing the JSON content
                 out = json.loads(content)
-        print("returning out",out)
+        
+        print("returning out", out)
         return out
+
     except Exception as e:
-        print("error in response",e)
+        print("error in response", e)
    
     return None
 
@@ -87,6 +98,7 @@ def call_OpenAI(script, captions_timed):
     
     # Return the static response formatted as JSON
     return static_response.strip()
+
 
 def merge_empty_intervals(segments):
     merged = []
