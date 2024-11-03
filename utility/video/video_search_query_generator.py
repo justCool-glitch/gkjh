@@ -92,7 +92,7 @@ def call_OpenAI(script, captions_timed):
         [[4, 6], ["immortal jellyfish", "unique species", "biological immortality"]],
         [[6, 8], ["ancient honey", "Egyptian tomb", "3,000-year-old honey"]],
         [[8, 10], ["shortest war", "Britain Zanzibar war", "38-minute war"]],
-        [[10, 12], ["octopus hearts", "blue blood", "three hearts"]]
+        [[10, 31.5], ["octopus hearts", "blue blood", "three hearts"]]
     ]
     """
     
