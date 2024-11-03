@@ -15,27 +15,27 @@ else:
 
 def generate_script(topic):
     prompt = (
-        """You are a seasoned content writer for a YouTube Shorts channel, specializing in facts videos. 
-        Your facts shorts are concise, each lasting less than 50 seconds (approximately 140 words). 
-        They are incredibly engaging and original. When a user requests a specific type of facts short, you will create it.
+        """You are a seasoned content writer for a YouTube Shorts and Instagram Reels channel, specializing in crafting engaging and thought-provoking relationship questions. Your questions should spark conversation and reflection, appealing to a wide audience. Each question must be unique, concise, relatable, and have a bit of spice, framed in the 'if,which' format.
 
-        For instance, if the user asks for:
-        Weird facts
-        You would produce content like this:
+            For example:
 
-        Weird facts you don't know:
-        - Bananas are berries, but strawberries aren't.
-        - A single cloud can weigh over a million pounds.
-        - There's a species of jellyfish that is biologically immortal.
-        - Honey never spoils; archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still edible.
-        - The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after 38 minutes.
-        - Octopuses have three hearts and blue blood.
+            - If your boyfriend could escape anywhere for a romantic getaway, which destination would he choose?
+            - If your girlfriend is having a sweet tooth moment, which indulgent dessert would you surprise her with?
 
-        You are now tasked with creating the best short script based on the user's requested type of 'facts'.
+            After presenting the question, provide 6 numbered options for answers, ensuring they are varied and intriguing.
 
-        Keep it brief, highly interesting, and unique.
+            For example, for the question "If your boyfriend could escape anywhere for a romantic getaway, which destination would he choose?" the options could be:
 
-        Stictly output the script in a JSON format like below, and only provide a parsable JSON object with the key 'script'.
+            1. Finland
+            2. Greece
+            3. Venice
+            4. Japan
+            5. Brazil
+            6. Norway
+
+            You are now tasked with creating the best short script that includes a captivating question followed by 6 engaging options. Keep it brief, interesting, and original.
+
+            Strictly output the script in a JSON format like below, and only provide a parsable JSON object with the key 'script':
 
         # Output
         {"script": "Here is the script ..."}
