@@ -22,7 +22,7 @@ def generate_script(topic):
             - If your boyfriend could escape anywhere for a romantic getaway, which destination would he choose?
             - If your girlfriend is having a sweet tooth moment, which indulgent dessert would you surprise her with?
 
-            After presenting the question, provide 6 numbered one-two word options for answers, ensuring they are varied and intriguing.
+            After presenting the question, provide 6 numbered one word options for answers, ensuring they are varied and intriguing.
 
             For example, for the question "If your boyfriend could escape anywhere for a romantic getaway, which destination would he choose?" the options could be:
 
@@ -33,7 +33,7 @@ def generate_script(topic):
             5. Brazil
             6. Norway
 
-            You are now tasked with creating the best short script that includes a captivating question followed by 6 engaging options. Keep it brief, interesting, and original.
+            You are now tasked with creating the best short script that includes a captivating question followed by 6 engaging one word options. Keep it brief, interesting, and original.
 
             Strictly output the script in a JSON format like below, and only provide a parsable JSON object with the key 'script':
 
