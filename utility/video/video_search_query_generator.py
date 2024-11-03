@@ -12,7 +12,7 @@ if len(os.environ.get("GROQ_API_KEY")) > 30:
         api_key=os.environ.get("GROQ_API_KEY"),
         )
 else:
-    model = "gpt-4o"
+    model = "gpt-4o-mini"
     OPENAI_API_KEY = os.environ.get('OPENAI_KEY')
     client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -48,57 +48,46 @@ def fix_json(json_str):
     json_str = json_str.replace('"you didn"t"', '"you didn\'t"')
     return json_str
 
-def getVideoSearchQueriesTimed(script, captions_timed):
+def getVideoSearchQueriesTimed(script,captions_timed):
     end = captions_timed[-1][0][1]
     try:
-        print("inside try for getVideoSearchQueriesTimed")
-        out = [[[0, 0], ""]]
         
-        # Loop until the end time matches the last segment's end time
+        out = [[[0,0],""]]
         while out[-1][0][1] != end:
-            content = call_OpenAI(script, captions_timed).replace("'", '"')
-            print("got content", content)
-            
+            content = call_OpenAI(script,captions_timed).replace("'",'"')
             try:
-                print("trying to load json")
                 out = json.loads(content)
-                
-                # Check if the last segment's end time matches 'end'
-                if out[-1][0][1] != end:
-                    print(f"The current output end time ({out[-1][0][1]}) does not match the expected end time ({end}). Retrying...")
-
             except Exception as e:
-                print("error in json load", e)
                 print("content: \n", content, "\n\n")
+                print(e)
                 content = fix_json(content.replace("```json", "").replace("```", ""))
-                
-                # Retry parsing after fixing the JSON content
                 out = json.loads(content)
-        
-        print("returning out", out)
         return out
-
     except Exception as e:
-        print("error in response", e)
+        print("error in response",e)
    
     return None
 
-def call_OpenAI(script, captions_timed):
-    # Static response that mimics expected output with keywords for each time segment
-    static_response = """
-    [
-        [[0, 2], ["bananas berries", "strawberries not berries", "fruit facts"]],
-        [[2, 4], ["heavy cloud", "million pounds cloud", "cloud weight"]],
-        [[4, 6], ["immortal jellyfish", "unique species", "biological immortality"]],
-        [[6, 8], ["ancient honey", "Egyptian tomb", "3,000-year-old honey"]],
-        [[8, 10], ["shortest war", "Britain Zanzibar war", "38-minute war"]],
-        [[10, 31.5], ["octopus hearts", "blue blood", "three hearts"]]
-    ]
-    """
+def call_OpenAI(script,captions_timed):
+    user_content = """Script: {}
+Timed Captions:{}
+""".format(script,"".join(map(str,captions_timed)))
+    print("Content", user_content)
     
-    # Return the static response formatted as JSON
-    return static_response.strip()
-
+    response = client.chat.completions.create(
+        model= model,
+        temperature=1,
+        messages=[
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": user_content}
+        ]
+    )
+    
+    text = response.choices[0].message.content.strip()
+    text = re.sub('\s+', ' ', text)
+    print("Text", text)
+    log_response(LOG_TYPE_GPT,script,text)
+    return text
 
 def merge_empty_intervals(segments):
     merged = []
