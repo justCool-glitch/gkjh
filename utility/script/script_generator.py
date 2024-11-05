@@ -33,7 +33,7 @@ def generate_script(topic):
             5. Brazil
             6. Norway
 
-            You are now tasked with creating the best short script that includes a captivating question that uses either girlfriend/boyfriend followed by 6 engaging one word options. Keep it brief, interesting, and original.
+            You are now tasked with creating the best short script that includes a captivating question that uses either girlfriend/boyfriend followed by 6 engaging two word options with """+topic+""" as a postfix to each option. Keep it brief, interesting, and original.
 
             Strictly output the script in a JSON format like below, and only provide a parsable JSON object with the key 'script':
 
