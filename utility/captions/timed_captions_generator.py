@@ -71,6 +71,7 @@ def getCaptionsWithTime(whisper_analysis, maxCaptionSize=15, considerPunctuation
             CaptionsPairs.append(((start_time, end_time), word))
             start_time = end_time
 
-    print("CaptionPairs "+CaptionsPairs)
+    print("CaptionPairs ")
+    print(CaptionsPairs)
     return CaptionsPairs
 
