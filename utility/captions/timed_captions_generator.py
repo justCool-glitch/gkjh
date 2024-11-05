@@ -46,21 +46,24 @@ def interpolateTimeFromDict(word_position, d):
             return value
     return None
 
-def getCaptionsWithTime(whisper_analysis, maxCaptionSize=500, considerPunctuation=True):
+def getCaptionsWithTime(whisper_analysis, maxCaptionSize=15, considerPunctuation=True):
    
     wordLocationToTime = getTimestampMapping(whisper_analysis)
     position = 0
     start_time = 0
     CaptionsPairs = []
     text = whisper_analysis['text']
-
-    # if considerPunctuation:
-    words = text.splitlines()
-    # words = [word for sentence in sentences for word in sentence.split()]
-    # else:
-        # words = text.split()
-        # words = [cleanWord(word) for word in splitWordsBySize(words, maxCaptionSize)]
+    print('wordloc')
+    print(wordLocationToTime)
+    if considerPunctuation:
+      words = text.splitlines()
+      words = [word for sentence in sentences for word in sentence.split()]
+    else:
+        words = text.split()
+        words = [cleanWord(word) for word in splitWordsBySize(words, maxCaptionSize)]
     
+    print('words')
+    print(words)
     for word in words:
         position += len(word) + 1
         end_time = interpolateTimeFromDict(position, wordLocationToTime)
