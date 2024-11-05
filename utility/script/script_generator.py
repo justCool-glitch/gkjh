@@ -22,7 +22,7 @@ def generate_script(topic):
             - If you know your boyfriend well, which destination would he choose?
             - If your know your girlfriend well, which indulgent dessert would you surprise her with?
 
-            After presenting the question, provide 6 numbered one word options for answers and each option should have """+topic+ """ as postfix, ensuring they are varied and intriguing.
+            After presenting the question, provide 6 numbered two word options for answers , ensuring they are varied and intriguing.
 
             For example, for the question "If you know your boyfriend well, which destination would he choose?" the options could be:
 
@@ -33,7 +33,7 @@ def generate_script(topic):
             5. Brazil
             6. Norway
 
-            You are now tasked with creating the best short script that includes a captivating question that uses either girlfriend/boyfriend followed by 6 engaging two word options with """+topic+""" as a postfix to each option. Keep each option in a newline. Keep it brief, interesting, and original.
+            You are now tasked with creating the best short script that includes a captivating question that uses either girlfriend/boyfriend followed by 6 engaging two word options . Keep each option in a newline. Keep it brief, interesting, and original.
 
             Strictly output the script in a JSON format like below, and only provide a parsable JSON object with the key 'script':
 
