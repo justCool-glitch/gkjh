@@ -24,7 +24,7 @@ def generate_script(topic):
 
             After presenting the question, provide 6 numbered one word options for answers and each option should have the "topic" as postfix, ensuring they are varied and intriguing.
 
-            For example, for the question "If your boyfriend could escape anywhere for a romantic getaway, which destination would he choose?" the options could be:
+            For example, for the question "If your know your boyfriend well, which destination would he choose?" the options could be:
 
             1. Finland
             2. Greece
@@ -43,7 +43,7 @@ def generate_script(topic):
         and the topic is:  
          """+topic
     )
-
+    print("original prompt: "+prompt)
     response = client.chat.completions.create(
             model=model,
             messages=[
