@@ -46,26 +46,57 @@ def interpolateTimeFromDict(word_position, d):
             return value
     return None
 
-def getCaptionsWithTime(whisper_analysis, maxCaptionSize=15, considerPunctuation=False):
+# def getCaptionsWithTime(whisper_analysis, maxCaptionSize=15, considerPunctuation=False):
    
+#     wordLocationToTime = getTimestampMapping(whisper_analysis)
+#     position = 0
+#     start_time = 0
+#     CaptionsPairs = []
+#     text = whisper_analysis['text']
+    
+#     if considerPunctuation:
+#         sentences = re.split(r'(?<=[.!?]) +', text)
+#         words = [word for sentence in sentences for word in splitWordsBySize(sentence.split(), maxCaptionSize)]
+#     else:
+#         words = text.split()
+#         words = [cleanWord(word) for word in splitWordsBySize(words, maxCaptionSize)]
+    
+#     for word in words:
+#         position += len(word) + 1
+#         end_time = interpolateTimeFromDict(position, wordLocationToTime)
+#         if end_time and word:
+#             CaptionsPairs.append(((start_time, end_time), word))
+#             start_time = end_time
+
+#     return CaptionsPairs
+
+def getCaptionsWithTime(whisper_analysis, considerPunctuation=False):
+    # Generate a mapping from character position to timestamp
     wordLocationToTime = getTimestampMapping(whisper_analysis)
-    position = 0
     start_time = 0
     CaptionsPairs = []
     text = whisper_analysis['text']
     
+    # Split the text based on newlines to create individual caption lines
     if considerPunctuation:
-        sentences = re.split(r'(?<=[.!?]) +', text)
-        words = [word for sentence in sentences for word in splitWordsBySize(sentence.split(), maxCaptionSize)]
+        # Split by punctuation and keep sentences on separate lines
+        lines = re.split(r'(?<=[.!?])\n*', text)
     else:
-        words = text.split()
-        words = [cleanWord(word) for word in splitWordsBySize(words, maxCaptionSize)]
+        # Split by newlines
+        lines = text.split('\n')
     
-    for word in words:
-        position += len(word) + 1
-        end_time = interpolateTimeFromDict(position, wordLocationToTime)
-        if end_time and word:
-            CaptionsPairs.append(((start_time, end_time), word))
-            start_time = end_time
-
+    position = 0
+    
+    for line in lines:
+        # Only process non-empty lines
+        if line.strip():
+            # Calculate the new position after the current line
+            position += len(line) + 1  # assuming '\n' takes 1 character space
+            end_time = interpolateTimeFromDict(position, wordLocationToTime)
+            
+            # Append the start and end time along with the line to CaptionsPairs
+            if end_time:
+                CaptionsPairs.append(((start_time, end_time), line))
+                start_time = end_time  # Update start_time for the next line
+            
     return CaptionsPairs
