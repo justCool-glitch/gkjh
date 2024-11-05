@@ -25,14 +25,17 @@ def splitWordsBySize(words, maxCaptionSize):
     return captions
 
 def getTimestampMapping(whisper_analysis):
-    text = whisper_analysis['text']
+   
     index = 0
     locationToTimestamp = {}
-    lines=text.splitlines()
-    for segment in lines:
-        for word in segment.split():
+    for segment in whisper_analysis['segments']:
+        for word in segment['words']:
             newIndex = index + len(word['text'])+1
+            print("len word ")
+            print(len(word['text']))
             locationToTimestamp[(index, newIndex)] = word['end']
+            print("end")
+            print(word['end'])
             index = newIndex
     return locationToTimestamp
 
