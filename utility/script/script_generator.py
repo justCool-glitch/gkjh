@@ -26,14 +26,14 @@ def generate_script(topic):
 
             For example, for the question "If you know your boyfriend well, which destination would he choose?" the options could be:
 
-            1. Finland """+topic+
-            """2. Greece """+topic+ 
-            """3. Venice """+topic+
-            """4. Japan """+topic+
-            """5. Brazil """+topic+
-            """6. Norway """+topic+
+            1. Finland
+            2. Greece
+            3. Venice
+            4. Japan
+            5. Brazil
+            6. Norway
 
-           """ You are now tasked with creating the best short script that includes a captivating question that uses either girlfriend/boyfriend followed by 6 engaging two word options with """+topic+""" as a postfix to each option. Keep each option in a newline. Keep it brief, interesting, and original.
+            You are now tasked with creating the best short script that includes a captivating question that uses either girlfriend/boyfriend followed by 6 engaging two word options with """+topic+""" as a postfix to each option. Keep each option in a newline. Keep it brief, interesting, and original.
 
             Strictly output the script in a JSON format like below, and only provide a parsable JSON object with the key 'script':
 
