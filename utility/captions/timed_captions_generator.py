@@ -55,7 +55,7 @@ def getCaptionsWithTime(whisper_analysis, maxCaptionSize=500, considerPunctuatio
     text = whisper_analysis['text']
 
     if considerPunctuation:
-        sentences = re.split(r'(?<=[.!?]) +', text)
+        sentences = text.splitlines()
         words = [word for sentence in sentences for word in splitWordsBySize(sentence.split(), maxCaptionSize)]
     else:
         words = text.split()
