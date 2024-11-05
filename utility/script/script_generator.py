@@ -22,9 +22,9 @@ def generate_script(topic):
             - If you know your boyfriend well, which destination would he choose?
             - If your know your girlfriend well, which indulgent dessert would you surprise her with?
 
-            After presenting the question, provide 6 numbered one word options for answers and each option should have the "topic" as postfix, ensuring they are varied and intriguing.
+            After presenting the question, provide 6 numbered one word options for answers and each option should have """+topic+ """ as postfix, ensuring they are varied and intriguing.
 
-            For example, for the question "If your know your boyfriend well, which destination would he choose?" the options could be:
+            For example, for the question "If you know your boyfriend well, which destination would he choose?" the options could be:
 
             1. Finland
             2. Greece
@@ -38,10 +38,8 @@ def generate_script(topic):
             Strictly output the script in a JSON format like below, and only provide a parsable JSON object with the key 'script':
 
         # Output
-        {"script": "Here is the script ..."}
-
-        and the topic is:  
-         """+topic
+        {"script": "Here is the script ..."}  
+         """
     )
     print("original prompt: "+prompt)
     response = client.chat.completions.create(
