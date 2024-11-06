@@ -20,23 +20,24 @@ log_directory = ".logs/gpt_logs"
 
 prompt = """# Instructions
 
-Given the following video script and timed captions, extract three visually concrete and specific keywords for each time segment that can be used to search for background videos. The keywords should be short and capture the main essence of the sentence. They can be synonyms or related terms. If a caption is vague or general, consider the next timed caption for more context. If a keyword is a single word, try to return a two-word keyword that is visually concrete. If a time frame contains two or more important pieces of information, divide it into shorter time frames with one keyword each. Ensure that the time periods are strictly consecutive and cover the entire length of the video. Each keyword should cover between 2-4 seconds. The output should be in JSON format, like this: [[[t1, t2], ["keyword1", "keyword2", "keyword3"]], [[t2, t3], ["keyword4", "keyword5", "keyword6"]], ...]. Please handle all edge cases, such as overlapping time segments, vague or general captions, and single-word keywords.
+Given the following video script and timed captions, extract three suspenseful, dark, or horrific keywords for each time segment that can be used to search for chilling or eerie background videos. The keywords should be specific and visually concrete, capturing the suspenseful or ominous essence of the sentence. Use synonyms or related terms when appropriate. If a caption is vague or general, refer to the next timed caption for added context. For single-word keywords, try to add a descriptive adjective or another word to make the visual even more evocative.
 
-For example, if the caption is 'The cheetah is the fastest land animal, capable of running at speeds up to 75 mph', the keywords should include 'cheetah running', 'fastest animal', and '75 mph'. Similarly, for 'The Great Wall of China is one of the most iconic landmarks in the world', the keywords should be 'Great Wall of China', 'iconic landmark', and 'China landmark'.
+If a time frame includes two or more important details, split it into shorter time frames and assign one keyword per segment. Ensure the time segments are strictly consecutive and fully cover the video’s length. Each keyword should cover about 2-4 seconds.
 
-Important Guidelines:
+The output should be in JSON format, like this:
 
-Use only English in your text queries.
-Each search string must depict something visual.
-The depictions have to be extremely visually concrete, like rainy street, or cat sleeping.
-'emotional moment' <= BAD, because it doesn't depict something visually.
-'crying child' <= GOOD, because it depicts something visual.
-The list must always contain the most relevant and appropriate query searches.
-['Car', 'Car driving', 'Car racing', 'Car parked'] <= BAD, because it's 4 strings.
-['Fast car'] <= GOOD, because it's 1 string.
-['Un chien', 'une voiture rapide', 'une maison rouge'] <= BAD, because the text query is NOT in English.
+json
+Copy code
+[[[t1, t2], ["keyword1", "keyword2", "keyword3"]], [[t2, t3], ["keyword4", "keyword5", "keyword6"]], ...]
+Guidelines
 
-Note: Your response should be the response only and no extra text or data.
+Focus on Suspense, Horror, or Darkness: Use words that evoke suspense, darkness, mystery, or fear.
+
+Use Visual Depictions: Only include keywords that visually depict something ominous or eerie (e.g., “dark alley” or “creaking door”). Avoid abstract or emotional terms that aren’t visually clear, like "uneasy feeling."
+
+Ensure Variety: Each set of keywords should be unique and descriptive, avoiding redundant terms like "creepy scene" multiple times.
+
+Format in English: Use only English terms, and each keyword should ideally consist of one to two words with a clear, suspenseful or dark imagery.
   """
 
 def fix_json(json_str):
