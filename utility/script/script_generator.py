@@ -15,25 +15,9 @@ else:
 
 def generate_script(topic):
     prompt = (
-        """You are a seasoned content writer for a YouTube Shorts and Instagram Reels channel, specializing in crafting engaging and thought-provoking relationship questions. Your questions should spark conversation and reflection, appealing to a wide audience. Each question must be unique, concise, relatable, and have a bit of spice, framed in the 'if,which' format.
-
-            For example:
-
-            - If you know your boyfriend well, which destination would he choose?
-            - If your know your girlfriend well, which indulgent dessert would you surprise her with?
-
-            After presenting the question, provide 6 numbered two word options for answers , ensuring they are varied and intriguing.
-
-            For example, for the question "If you know your boyfriend well, which destination would he choose?" the options could be:
-
-            1. Finland
-            2. Greece
-            3. Venice
-            4. Japan
-            5. Brazil
-            6. Norway
-
-            You are now tasked with creating the best short script that includes a captivating question that uses either girlfriend/boyfriend followed by 6 engaging two word options . Keep each option in a newline. Keep it brief, interesting, and original.
+        """Write a three-line story filled with suspense and a sense of impending danger.
+          Capture a moment where an everyday scene takes a sudden dark turn, leaving the reader with a lingering question or fear.
+          Each line of the story should be in a new line
 
             Strictly output the script in a JSON format like below, and only provide a parsable JSON object with the key 'script':
 
