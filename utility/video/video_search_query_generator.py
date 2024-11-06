@@ -20,7 +20,7 @@ log_directory = ".logs/gpt_logs"
 
 prompt = """# Instructions
 
-Given the following video script and timed captions, extract three suspenseful, dark, or horrific keywords for each time segment that can be used to search for chilling or eerie background videos. The keywords should be specific and visually concrete, capturing the suspenseful or ominous essence of the sentence. Use synonyms or related terms when appropriate. If a caption is vague or general, refer to the next timed caption for added context. For single-word keywords, try to add a descriptive adjective or another word to make the visual even more evocative.
+Given the following video script and timed captions, extract three suspenseful, dark, or horrific keywords and add "dark" to each keyword for each time segment that can be used to search for chilling or eerie background videos. The keywords should be specific and visually concrete, capturing the suspenseful or ominous essence of the sentence. Use synonyms or related terms when appropriate. If a caption is vague or general, refer to the next timed caption for added context. For single-word keywords, try to add a descriptive adjective or another word to make the visual even more evocative.
 
 If a time frame includes two or more important details, split it into shorter time frames and assign one keyword per segment. Ensure the time segments are strictly consecutive and fully cover the video’s length. Each keyword should cover about 2-4 seconds.
 
